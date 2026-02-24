@@ -1,0 +1,36 @@
+name: Deploy to Hostinger via FTP
+
+on:
+  push:
+    branches:
+      - main # Dispara o deploy quando houver push na branch principal
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+      
+      - name: 📂 Sync files (Only Web Files)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: public_html/    # Diretório padrão da Hostinger para exibir o site publicamente
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .aios-core/**
+            .gemini/**
+            packages/**
+            tests/**
+            scripts/**
+            docs/**
+            bin/**
+            pro/**
+            package*.json
+            # O exclude acima garante que o AIOS e repositórios pesados do Node NÃO sejam enviados ao servidor, poupando espaço e evitando erros.
