@@ -20,18 +20,9 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: public_html/    # Diretório padrão da Hostinger para exibir o site publicamente
-          local-dir: ./public/
+          local-dir: ./
           exclude: |
             **/.git*
             **/.git*/**
-            **/node_modules/**
-            .aios-core/**
-            .gemini/**
-            packages/**
-            tests/**
-            scripts/**
-            docs/**
-            bin/**
-            pro/**
-            package*.json
-            # O exclude acima garante que o AIOS e repositórios pesados do Node NÃO sejam enviados ao servidor, poupando espaço e evitando erros.
+            .github/**
+            aios_system/**
