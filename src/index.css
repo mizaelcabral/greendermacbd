@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --animate-scroll-x: scroll-x 20s linear infinite;
+  @keyframes scroll-x {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+}
