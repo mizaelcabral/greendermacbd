@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search, ChevronDown, ChevronRight, ChevronsRight, Play, ArrowUp, User, Calendar, Menu, X } from 'lucide-react';
+import AgeVerification from './components/AgeVerification';
 
 export default function App() {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
@@ -100,6 +101,7 @@ export default function App() {
 
   return (
     <>
+      <AgeVerification />
       <div className="min-h-screen relative font-sans text-white overflow-hidden bg-[#0a1f12]">
         {/* Background Image with Overlay */}
         <div
