@@ -73,6 +73,51 @@ export default function App() {
 
   const [activeArticle, setActiveArticle] = useState<typeof blogPosts[0] | null>(null);
 
+  // Contact Form State
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormStatus('loading');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('http://localhost:3001/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
+
+      setFormStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setFormStatus('idle'), 5000);
+    } catch (err: any) {
+      setFormStatus('error');
+      setErrorMessage(err.message || 'An unexpected error occurred');
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   const faqs = [
     {
       question: "WHAT IS GREENDERMA USED FOR?",
@@ -1067,12 +1112,16 @@ export default function App() {
                 
                 <h3 className="text-2xl font-bold mb-8">Send a Message</h3>
                 
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleContactSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="flex flex-col">
                       <label className="text-[10px] font-bold tracking-widest uppercase text-gray-400 mb-2 ml-1">Full Name</label>
                       <input 
                         type="text" 
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        required
                         placeholder="Your Name" 
                         className="bg-[#1b3320] border border-white/10 rounded-lg px-4 py-3.5 focus:outline-none focus:border-[#FFD600] transition-colors font-light text-sm"
                       />
@@ -1081,6 +1130,10 @@ export default function App() {
                       <label className="text-[10px] font-bold tracking-widest uppercase text-gray-400 mb-2 ml-1">Email Address</label>
                       <input 
                         type="email" 
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
                         placeholder="Your Email" 
                         className="bg-[#1b3320] border border-white/10 rounded-lg px-4 py-3.5 focus:outline-none focus:border-[#FFD600] transition-colors font-light text-sm"
                       />
@@ -1089,16 +1142,35 @@ export default function App() {
                   <div className="flex flex-col">
                     <label className="text-[10px] font-bold tracking-widest uppercase text-gray-400 mb-2 ml-1">Message</label>
                     <textarea 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      required
                       placeholder="How can we help you?" 
                       rows={4}
                       className="bg-[#1b3320] border border-white/10 rounded-lg px-4 py-3.5 focus:outline-none focus:border-[#FFD600] transition-colors font-light text-sm resize-none"
                     ></textarea>
                   </div>
+
+                  {formStatus === 'error' && (
+                    <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-400 text-sm rounded-lg">
+                      {errorMessage}
+                    </div>
+                  )}
+
+                  {formStatus === 'success' && (
+                    <div className="p-4 bg-green-500/10 border border-green-500/20 text-green-400 text-sm rounded-lg">
+                      Message sent successfully! We'll get back to you soon.
+                    </div>
+                  )}
+
                   <button 
                     type="submit" 
-                    className="w-full bg-[#FFD600] text-black font-bold py-4 rounded-lg hover:bg-yellow-400 transition-all duration-300 flex items-center justify-center group cursor-pointer"
+                    disabled={formStatus === 'loading'}
+                    className={`w-full bg-[#FFD600] text-black font-bold py-4 rounded-lg hover:bg-yellow-400 transition-all duration-300 flex items-center justify-center group cursor-pointer ${formStatus === 'loading' ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
-                    Send Message <ChevronsRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    {formStatus === 'loading' ? 'Sending...' : 'Send Message'} 
+                    {formStatus !== 'loading' && <ChevronsRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />}
                   </button>
                 </form>
               </div>
