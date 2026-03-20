@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, ChevronDown, ChevronRight, ChevronsRight, Play, ArrowUp, User, Calendar, Menu, X } from 'lucide-react';
+import { Search, ChevronDown, ChevronRight, ChevronsRight, Play, ArrowUp, User, Calendar, Menu, X, MapPin, Phone, Mail } from 'lucide-react';
 import AgeVerification from './components/AgeVerification';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -927,6 +927,7 @@ export default function App() {
         </div>
       </section>
 
+
       {/* Blog Section */}
       <section className="bg-[#162a1a] text-white py-16 lg:py-24 font-sans">
         <div className="container mx-auto px-6 lg:px-12">
@@ -985,6 +986,124 @@ export default function App() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="bg-[#1b3320] text-white py-16 lg:py-24 font-sans relative overflow-hidden">
+        {/* Subtle decorative background element */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#689f38]/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FFD600]/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
+
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="flex flex-col lg:flex-row gap-16 items-start">
+            
+            {/* Left Column: Contact info */}
+            <div className="lg:w-1/2">
+              <div className="flex items-center space-x-2 text-[10px] font-bold tracking-widest uppercase text-gray-300 mb-4">
+                <svg viewBox="0 0 24 24" className="w-4 h-4 text-[#689f38]" fill="currentColor">
+                  <path d="M12 1L13.5 8.5L21 7L15.5 12.5L19 20L12 15.5L5 20L8.5 12.5L3 7L10.5 8.5L12 1Z" />
+                </svg>
+                <span>Connect With Us</span>
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-bold leading-tight mb-8">
+                Talk to a Specialist
+              </h2>
+              <p className="text-gray-300 text-lg leading-relaxed mb-12 font-light max-w-lg">
+                Have questions about our products or therapeutic programs? Our team of experts is ready to help you on your wellness journey.
+              </p>
+
+              <div className="space-y-8">
+                {/* Contact Item: Address */}
+                <div className="flex items-start space-x-6 group">
+                  <div className="bg-[#4a7c46] p-4 rounded-xl group-hover:bg-[#FFD600] group-hover:text-black transition-colors duration-300">
+                    <MapPin className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold mb-1">Our Location</h3>
+                    <p className="text-gray-400 font-light leading-relaxed">
+                      9107 WEST RUSSELL ROAD SUITE 100<br />
+                      LAS VEGAS, NV 89148, USA
+                    </p>
+                  </div>
+                </div>
+
+                {/* Contact Item: Phone */}
+                <div className="flex items-start space-x-6 group">
+                  <div className="bg-[#4a7c46] p-4 rounded-xl group-hover:bg-[#FFD600] group-hover:text-black transition-colors duration-300">
+                    <Phone className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold mb-1">Call Us</h3>
+                    <p className="text-gray-400 font-light leading-relaxed">
+                      +1 (702) 555-0123<br />
+                      Mon - Fri: 9:00 AM - 6:00 PM
+                    </p>
+                  </div>
+                </div>
+
+                {/* Contact Item: Email */}
+                <div className="flex items-start space-x-6 group">
+                  <div className="bg-[#4a7c46] p-4 rounded-xl group-hover:bg-[#FFD600] group-hover:text-black transition-colors duration-300">
+                    <Mail className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold mb-1">Email Support</h3>
+                    <p className="text-gray-400 font-light leading-relaxed hover:text-[#FFD600] transition-colors cursor-pointer">
+                      contact@greendermacbd.com<br />
+                      support@greendermacbd.com
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Contact form */}
+            <div className="lg:w-1/2 w-full">
+              <div className="bg-[#162a1a] border border-white/5 p-8 lg:p-12 rounded-2xl shadow-2xl relative overflow-hidden group">
+                {/* Visual accent */}
+                <div className="absolute top-0 right-0 w-2 h-full bg-[#FFD600]" />
+                
+                <h3 className="text-2xl font-bold mb-8">Send a Message</h3>
+                
+                <form className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="flex flex-col">
+                      <label className="text-[10px] font-bold tracking-widest uppercase text-gray-400 mb-2 ml-1">Full Name</label>
+                      <input 
+                        type="text" 
+                        placeholder="Your Name" 
+                        className="bg-[#1b3320] border border-white/10 rounded-lg px-4 py-3.5 focus:outline-none focus:border-[#FFD600] transition-colors font-light text-sm"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label className="text-[10px] font-bold tracking-widest uppercase text-gray-400 mb-2 ml-1">Email Address</label>
+                      <input 
+                        type="email" 
+                        placeholder="Your Email" 
+                        className="bg-[#1b3320] border border-white/10 rounded-lg px-4 py-3.5 focus:outline-none focus:border-[#FFD600] transition-colors font-light text-sm"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="text-[10px] font-bold tracking-widest uppercase text-gray-400 mb-2 ml-1">Message</label>
+                    <textarea 
+                      placeholder="How can we help you?" 
+                      rows={4}
+                      className="bg-[#1b3320] border border-white/10 rounded-lg px-4 py-3.5 focus:outline-none focus:border-[#FFD600] transition-colors font-light text-sm resize-none"
+                    ></textarea>
+                  </div>
+                  <button 
+                    type="submit" 
+                    className="w-full bg-[#FFD600] text-black font-bold py-4 rounded-lg hover:bg-yellow-400 transition-all duration-300 flex items-center justify-center group cursor-pointer"
+                  >
+                    Send Message <ChevronsRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </form>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
