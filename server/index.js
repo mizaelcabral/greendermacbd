@@ -26,12 +26,26 @@ app.post('/api/contact', async (req, res) => {
       subject: `New Contact Message from ${name}`,
       reply_to: email,
       html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #1b3320; border-radius: 8px; overflow: hidden;">
+          <div style="background-color: #1b3320; padding: 24px; text-align: center;">
+            <h1 style="color: #FFD600; margin: 0; font-size: 24px;">New Contact Submission</h1>
+          </div>
+          <div style="padding: 32px; color: #333; line-height: 1.6;">
+            <p style="margin-top: 0;">You have received a new message from the Greenderma website.</p>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 24px 0;">
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Message:</strong></p>
+            <div style="background-color: #f9f9f9; padding: 16px; border-radius: 4px; border-left: 4px solid #FFD600;">
+              ${message}
+            </div>
+          </div>
+          <div style="background-color: #f4f4f4; padding: 16px; text-align: center; font-size: 12px; color: #777;">
+            &copy; 2026 Greenderma CBD. All rights reserved.
+          </div>
+        </div>
       `,
+      text: `New Contact Form Submission\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     });
 
     if (error) {
