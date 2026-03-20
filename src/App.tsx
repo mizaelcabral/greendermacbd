@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, ChevronDown, ChevronRight, ChevronsRight, Play, ArrowUp, User, Calendar, Menu, X } from 'lucide-react';
 import AgeVerification from './components/AgeVerification';
+import ScrollToTop from './components/ScrollToTop';
 
 export default function App() {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
@@ -1117,7 +1118,8 @@ export default function App() {
             </p>
           </div>
         </div>
-      </footer >
+      </footer>
+      <ScrollToTop />
     </>
   );
 }
