@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Search, ChevronDown, ChevronRight, ChevronsRight, Play, ArrowUp, User, Calendar, Menu, X, MapPin, Phone, Mail } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Search, ChevronDown, ChevronRight, ChevronsRight, Play, ArrowUp, User, Calendar, Menu, X, MapPin, Phone, Mail, ChevronLeft } from 'lucide-react';
 import AgeVerification from './components/AgeVerification';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -72,6 +72,101 @@ export default function App() {
   ];
 
   const [activeArticle, setActiveArticle] = useState<typeof blogPosts[0] | null>(null);
+
+  const products = [
+    {
+      id: 1,
+      name: "CBD Oil 300mg",
+      price: "$89.00",
+      image: "/images/cbd-oil.png",
+      description: "Our premium 300mg CBD oil is meticulously extracted to ensure maximum purity. Perfect for daily wellness, it provides a balanced effect for mind and body without any psychoactive properties."
+    },
+    {
+      id: 2,
+      name: "CBD Ointment",
+      price: "$59.00",
+      image: "/images/cbd-ointment.png",
+      description: "Specially formulated for localized relief, our CBD ointment penetrates deep. Enriched with natural botanicals, it soothes skin and muscles effectively while maintaining a non-greasy, refreshing texture."
+    },
+    {
+      id: 3,
+      name: "CBD Gummies",
+      price: "$98.00",
+      image: "/images/cbd-gummies.png",
+      description: "A delicious and precise way to consume your daily dose of wellness. Each gummy is infused with high-quality CBD and natural fruit flavors to provide a consistent and enjoyable therapeutic experience."
+    },
+    {
+      id: 4,
+      name: "CBD Brownies",
+      price: "$45.00",
+      image: "/images/card-brownies.png",
+      description: "Delicious, relaxing, and infused with high-quality CBD. A perfect treat for any time of the day to help you unwind and destress naturally."
+    },
+    {
+      id: 5,
+      name: "Organic CBD Drops",
+      price: "$75.00",
+      image: "/images/card-organic.png",
+      description: "Pure and organic CBD drops for a natural wellness boost. Feel the difference with every drop, designed for sublingual use to ensure rapid absorption."
+    },
+    {
+      id: 6,
+      name: "CBD Softgels",
+      price: "$65.00",
+      image: "/images/card-cbd-store.png",
+      description: "Easy to swallow softgels formulated for slow release and long-lasting relief. Ideal for incorporating into your daily supplement routine seamlessly."
+    },
+    {
+      id: 7,
+      name: "Intensive CBD Ointment",
+      price: "$69.00",
+      image: "/images/Greenderma CBD Ointment 1.png",
+      description: "Our strongest topical formula. Ideal for deep muscle recovery and intense localized soothing after strenuous activities or for chronic discomfort."
+    }
+  ];
+
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: -350, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: 350, behavior: 'smooth' });
+    }
+  };
+
+  // Drag to scroll logic for desktop
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeftPos, setScrollLeftPos] = useState(0);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsMouseDown(true);
+    if (carouselRef.current) {
+      setStartX(e.pageX - carouselRef.current.offsetLeft);
+      setScrollLeftPos(carouselRef.current.scrollLeft);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsMouseDown(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDown || !carouselRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - carouselRef.current.offsetLeft;
+    const walk = (x - startX) * 2; 
+    carouselRef.current.scrollLeft = scrollLeftPos - walk;
+  };
 
   // Contact Form State
   const [formData, setFormData] = useState({
@@ -840,75 +935,70 @@ export default function App() {
             </h2>
           </div>
 
-          {/* Products Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Products Carousel */}
+          <div className="relative max-w-[1400px] mx-auto group/carousel">
+            
+            {/* Carousel Navigation - Left */}
+            <button 
+              onClick={scrollLeft}
+              className="absolute left-2 md:-left-6 top-[150px] md:top-1/3 -translate-y-1/2 bg-[#1b3320]/90 md:bg-[#1b3320] p-2 md:p-3 rounded-full text-white hover:text-[#FFD600] transition-all opacity-100 md:opacity-0 group-hover/carousel:opacity-100 z-10 border border-white/20 flex shadow-xl cursor-pointer"
+              aria-label="Previous products"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
 
-            {/* Product 1 */}
-            <div className="flex flex-col">
-              <div className="bg-[#4a7c46] rounded-xl aspect-square mb-6 flex items-center justify-center p-8 relative overflow-hidden">
-                <img
-                  src="/images/cbd-oil.png"
-                  alt="CBD Oil 300mg"
-                  className="w-full h-full object-cover rounded-lg"
-                />
-              </div>
-              <div className="flex justify-between items-end mb-4">
-                <h3 className="text-xl font-bold">CBD Oil 300mg</h3>
-                <span className="text-xl font-bold">$89.00</span>
-              </div>
-              <div className="w-full h-px bg-white/20 mb-4"></div>
-              <p className="text-gray-300 text-sm leading-relaxed mb-6 font-light min-h-[4.5rem]">
-                Our premium 300mg CBD oil is meticulously extracted to ensure maximum purity. Perfect for daily wellness, it provides a balanced effect for mind and body without any psychoactive properties.
-              </p>
-              <button className="text-white text-xs font-bold flex items-center hover:text-[#FFD600] transition-colors uppercase tracking-wider cursor-pointer">
-                Order Now <ChevronRight className="ml-1 w-4 h-4" />
-              </button>
+            {/* Carousel Container */}
+            <div 
+              ref={carouselRef}
+              className={`flex overflow-x-auto gap-8 scrollbar-hide pb-8 pt-4 px-4 ${isMouseDown ? 'snap-none cursor-grabbing select-none' : 'snap-x snap-mandatory cursor-grab'}`}
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              onMouseDown={handleMouseDown}
+              onMouseLeave={handleMouseLeave}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+            >
+              <style dangerouslySetInnerHTML={{__html: `
+                .scrollbar-hide::-webkit-scrollbar {
+                  display: none;
+                }
+              `}} />
+              {products.map((product) => (
+                <div key={product.id} className="snap-start shrink-0 w-[280px] sm:w-[320px] md:w-[350px] flex flex-col">
+                  <div className="bg-[#4a7c46] rounded-xl aspect-square mb-6 flex items-center justify-center p-8 relative overflow-hidden group">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover rounded-lg transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex justify-between items-end mb-4 gap-2">
+                    <h3 className="text-xl font-bold leading-tight">{product.name}</h3>
+                    <span className="text-xl font-bold whitespace-nowrap">{product.price}</span>
+                  </div>
+                  <div className="w-full h-px bg-white/20 mb-4"></div>
+                  <p className="text-gray-300 text-sm leading-relaxed mb-6 font-light min-h-[5.5rem] line-clamp-4">
+                    {product.description}
+                  </p>
+                  <button className="mt-auto text-white text-xs font-bold flex items-center hover:text-[#FFD600] transition-colors uppercase tracking-wider cursor-pointer group/btn">
+                    Order Now <ChevronRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              ))}
             </div>
 
-            {/* Product 2 */}
-            <div className="flex flex-col">
-              <div className="bg-[#4a7c46] rounded-xl aspect-square mb-6 flex items-center justify-center p-8 relative overflow-hidden">
-                <img
-                  src="/images/cbd-ointment.png"
-                  alt="CBD Ointment"
-                  className="w-full h-full object-cover rounded-lg"
-                />
-              </div>
-              <div className="flex justify-between items-end mb-4">
-                <h3 className="text-xl font-bold">CBD Ointment</h3>
-                <span className="text-xl font-bold">$59.00</span>
-              </div>
-              <div className="w-full h-px bg-white/20 mb-4"></div>
-              <p className="text-gray-300 text-sm leading-relaxed mb-6 font-light min-h-[4.5rem]">
-                Specially formulated for localized relief, our CBD ointment penetrates deep. Enriched with natural botanicals, it soothes skin and muscles effectively while maintaining a non-greasy, refreshing texture.
-              </p>
-              <button className="text-white text-xs font-bold flex items-center hover:text-[#FFD600] transition-colors uppercase tracking-wider cursor-pointer">
-                Order Now <ChevronRight className="ml-1 w-4 h-4" />
-              </button>
+            {/* Carousel Navigation - Right */}
+            <button 
+              onClick={scrollRight}
+              className="absolute right-2 md:-right-6 top-[150px] md:top-1/3 -translate-y-1/2 bg-[#1b3320]/90 md:bg-[#1b3320] p-2 md:p-3 rounded-full text-white hover:text-[#FFD600] transition-all opacity-100 md:opacity-0 group-hover/carousel:opacity-100 z-10 border border-white/20 flex shadow-xl cursor-pointer"
+              aria-label="Next products"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+            
+            {/* Mobile Swipe Indicator */}
+            <div className="flex justify-center mt-2 md:hidden text-gray-400 text-xs items-center gap-2">
+              <span>Swipe to explore</span>
             </div>
-
-            {/* Product 3 */}
-            <div className="flex flex-col">
-              <div className="bg-[#4a7c46] rounded-xl aspect-square mb-6 flex items-center justify-center p-8 relative overflow-hidden">
-                <img
-                  src="/images/cbd-gummies.png"
-                  alt="CBD Gummies"
-                  className="w-full h-full object-cover rounded-lg"
-                />
-              </div>
-              <div className="flex justify-between items-end mb-4">
-                <h3 className="text-xl font-bold">CBD Gummies</h3>
-                <span className="text-xl font-bold">$98.00</span>
-              </div>
-              <div className="w-full h-px bg-white/20 mb-4"></div>
-              <p className="text-gray-300 text-sm leading-relaxed mb-6 font-light min-h-[4.5rem]">
-                A delicious and precise way to consume your daily dose of wellness. Each gummy is infused with high-quality CBD and natural fruit flavors to provide a consistent and enjoyable therapeutic experience.
-              </p>
-              <button className="text-white text-xs font-bold flex items-center hover:text-[#FFD600] transition-colors uppercase tracking-wider cursor-pointer">
-                Order Now <ChevronRight className="ml-1 w-4 h-4" />
-              </button>
-            </div>
-
           </div>
         </div>
       </section>
