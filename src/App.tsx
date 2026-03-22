@@ -240,10 +240,18 @@ export default function App() {
     }
   ];
 
+  const handleScroll = (e: React.MouseEvent, targetId: string) => {
+    e.preventDefault();
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       <AgeVerification />
-      <div className="min-h-screen relative font-sans text-white overflow-hidden bg-[#0a1f12]">
+      <div id="home" className="min-h-screen relative font-sans text-white overflow-hidden bg-[#0a1f12]">
         {/* Background Image with Overlay */}
         <div
           className="absolute inset-0 z-0 bg-cover bg-center opacity-70 mix-blend-luminosity"
@@ -261,13 +269,11 @@ export default function App() {
           <nav className="container mx-auto px-6 lg:px-12 py-6 flex items-center justify-between">
             {/* Left Links */}
             <div className="hidden lg:flex items-center space-x-8 text-sm font-medium tracking-wide">
-              <a href="#" className="hover:text-[#FFD600] transition-colors cursor-pointer">Home</a>
-              <a href="#" className="hover:text-[#FFD600] transition-colors cursor-pointer">About</a>
-              <a href="#" className="hover:text-[#FFD600] transition-colors cursor-pointer">Products</a>
-              <a href="#" className="hover:text-[#FFD600] transition-colors cursor-pointer">
-                FAQ
-              </a>
-              <a href="#" className="hover:text-[#FFD600] transition-colors cursor-pointer">Contact</a>
+              <a href="#home" onClick={(e) => handleScroll(e, 'home')} className="hover:text-[#FFD600] transition-colors cursor-pointer">Home</a>
+              <a href="#about" onClick={(e) => handleScroll(e, 'about')} className="hover:text-[#FFD600] transition-colors cursor-pointer">About</a>
+              <a href="#products" onClick={(e) => handleScroll(e, 'products')} className="hover:text-[#FFD600] transition-colors cursor-pointer">Products</a>
+              <a href="#faq" onClick={(e) => handleScroll(e, 'faq')} className="hover:text-[#FFD600] transition-colors cursor-pointer">FAQ</a>
+              <a href="#contact" onClick={(e) => handleScroll(e, 'contact')} className="hover:text-[#FFD600] transition-colors cursor-pointer">Contact</a>
             </div>
 
             <div className="flex items-center justify-center lg:absolute lg:left-1/2 lg:-translate-x-1/2 cursor-pointer">
@@ -279,7 +285,7 @@ export default function App() {
               <button className="hover:text-[#FFD600] transition-colors cursor-pointer">
                 <Search className="w-5 h-5" />
               </button>
-              <button className="hidden lg:flex bg-[#FFD600] text-black px-5 py-2.5 rounded font-semibold text-sm hover:bg-yellow-400 transition-colors items-center cursor-pointer">
+              <button onClick={(e) => handleScroll(e, 'contact')} className="hidden lg:flex bg-[#FFD600] text-black px-5 py-2.5 rounded font-semibold text-sm hover:bg-yellow-400 transition-colors items-center cursor-pointer">
                 Contact Us <ChevronRight className="ml-1 w-4 h-4" />
               </button>
               <button
@@ -294,14 +300,12 @@ export default function App() {
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
             <div className="lg:hidden absolute top-[88px] left-0 right-0 bg-[#0a1f12] border-t border-white/10 z-50 px-6 py-4 flex flex-col space-y-4 shadow-xl">
-              <a href="#" className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">Home</a>
-              <a href="#" className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">About</a>
-              <a href="#" className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">Products</a>
-              <a href="#" className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">
-                FAQ
-              </a>
-              <a href="#" className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">Contact</a>
-              <button className="bg-[#FFD600] text-black px-5 py-3 rounded font-semibold text-sm hover:bg-yellow-400 transition-colors flex items-center justify-center mt-4 cursor-pointer">
+              <a href="#home" onClick={(e) => { handleScroll(e, 'home'); setIsMobileMenuOpen(false); }} className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">Home</a>
+              <a href="#about" onClick={(e) => { handleScroll(e, 'about'); setIsMobileMenuOpen(false); }} className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">About</a>
+              <a href="#products" onClick={(e) => { handleScroll(e, 'products'); setIsMobileMenuOpen(false); }} className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">Products</a>
+              <a href="#faq" onClick={(e) => { handleScroll(e, 'faq'); setIsMobileMenuOpen(false); }} className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">FAQ</a>
+              <a href="#contact" onClick={(e) => { handleScroll(e, 'contact'); setIsMobileMenuOpen(false); }} className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">Contact</a>
+              <button onClick={(e) => { handleScroll(e, 'contact'); setIsMobileMenuOpen(false); }} className="bg-[#FFD600] text-black px-5 py-3 rounded font-semibold text-sm hover:bg-yellow-400 transition-colors flex items-center justify-center mt-4 cursor-pointer">
                 Contact Us <ChevronRight className="ml-1 w-4 h-4" />
               </button>
             </div>
@@ -323,10 +327,10 @@ export default function App() {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <button className="bg-[#FFD600] text-black px-8 py-3.5 rounded font-bold hover:bg-yellow-400 transition-colors flex items-center text-sm cursor-pointer">
+                <button onClick={(e) => handleScroll(e, 'contact')} className="bg-[#FFD600] text-black px-8 py-3.5 rounded font-bold hover:bg-yellow-400 transition-colors flex items-center text-sm cursor-pointer">
                   Start Free Consultation <ChevronsRight className="ml-2 w-4 h-4" />
                 </button>
-                <button className="border border-[#FFD600] text-[#FFD600] px-8 py-3.5 rounded font-bold hover:bg-[#FFD600] hover:text-black transition-colors flex items-center text-sm cursor-pointer">
+                <button onClick={(e) => handleScroll(e, 'products')} className="border border-[#FFD600] text-[#FFD600] px-8 py-3.5 rounded font-bold hover:bg-[#FFD600] hover:text-black transition-colors flex items-center text-sm cursor-pointer">
                   See Products <ChevronsRight className="ml-2 w-4 h-4" />
                 </button>
               </div>
@@ -358,7 +362,7 @@ export default function App() {
       </div>
 
       {/* About Section */}
-      <section className="bg-[#1b3320] text-white py-24 font-sans">
+      <section id="about" className="bg-[#1b3320] text-white py-24 font-sans">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
@@ -372,7 +376,7 @@ export default function App() {
               <p className="text-gray-300 leading-relaxed font-light">
                 At Greenderma, we believe in the healing power of nature. Our mission is to provide safe and educated access to cannabis therapies, improving the quality of life of our patients with premium products, specialized care, and a deep commitment to scientific research that ensures the best results for your wellness journey.
               </p>
-              <button className="bg-[#FFD600] text-black px-6 py-2.5 rounded font-bold hover:bg-yellow-400 transition-colors flex items-center text-sm cursor-pointer">
+              <button onClick={(e) => handleScroll(e, 'products')} className="bg-[#FFD600] text-black px-6 py-2.5 rounded font-bold hover:bg-yellow-400 transition-colors flex items-center text-sm cursor-pointer">
                 Our Products <ChevronsRight className="ml-1 w-4 h-4" />
               </button>
             </div>
@@ -807,7 +811,7 @@ export default function App() {
               </p>
 
               <div>
-                <button className="bg-[#FFD600] text-black px-6 py-2.5 rounded font-bold hover:bg-yellow-400 transition-colors flex items-center text-sm cursor-pointer">
+                <button onClick={(e) => handleScroll(e, 'contact')} className="bg-[#FFD600] text-black px-6 py-2.5 rounded font-bold hover:bg-yellow-400 transition-colors flex items-center text-sm cursor-pointer">
                   Contact Us <ChevronsRight className="ml-1 w-4 h-4" />
                 </button>
               </div>
@@ -919,7 +923,7 @@ export default function App() {
       </section>
 
       {/* Check Our Product Section */}
-      <section className="bg-[#1b3320] text-white py-16 lg:py-24 font-sans">
+      <section id="products" className="bg-[#1b3320] text-white py-16 lg:py-24 font-sans">
         <div className="container mx-auto px-6 lg:px-12">
 
           {/* Header */}
@@ -980,7 +984,7 @@ export default function App() {
                   </p>
                   <div className="mt-auto flex items-center justify-between w-full">
                     <span className="text-2xl font-bold whitespace-nowrap text-white">{product.price}</span>
-                    <button className="text-white text-xs font-bold flex items-center hover:text-[#FFD600] transition-colors uppercase tracking-wider cursor-pointer group/btn">
+                    <button onClick={(e) => handleScroll(e, 'contact')} className="text-white text-xs font-bold flex items-center hover:text-[#FFD600] transition-colors uppercase tracking-wider cursor-pointer group/btn">
                       Order Now <ChevronRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </button>
                   </div>
@@ -1006,7 +1010,7 @@ export default function App() {
       </section>
 
       {/* FAQs Section */}
-      <section className="bg-[#1b3320] text-white py-16 lg:py-24 font-sans">
+      <section id="faq" className="bg-[#1b3320] text-white py-16 lg:py-24 font-sans">
         <div className="container mx-auto px-6 lg:px-12">
 
           {/* Header */}
@@ -1128,7 +1132,7 @@ export default function App() {
       </section>
 
       {/* Contact Section */}
-      <section className="bg-[#1b3320] text-white py-16 lg:py-24 font-sans relative overflow-hidden">
+      <section id="contact" className="bg-[#1b3320] text-white py-16 lg:py-24 font-sans relative overflow-hidden">
         {/* Subtle decorative background element */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#689f38]/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FFD600]/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
@@ -1188,8 +1192,7 @@ export default function App() {
                   <div>
                     <h3 className="text-lg font-bold mb-1">Email Support</h3>
                     <p className="text-gray-400 font-light leading-relaxed hover:text-[#FFD600] transition-colors cursor-pointer">
-                      contact@greendermacbd.com<br />
-                      support@greendermacbd.com
+                      contact@greendermacbd.com
                     </p>
                   </div>
                 </div>
@@ -1342,11 +1345,21 @@ export default function App() {
             <div className="flex flex-col lg:pr-12">
               <h3 className="text-2xl font-bold mb-8">Quick Links</h3>
               <ul className="space-y-4">
-                {['Home', 'About', 'Products', 'Contact', 'FAQs'].map((link) => (
-                  <li key={link}>
-                    <a href="#" className="group flex items-center text-base cursor-pointer">
+                {[
+                  { title: 'Home', id: 'home' },
+                  { title: 'About', id: 'about' },
+                  { title: 'Products', id: 'products' },
+                  { title: 'Contact', id: 'contact' },
+                  { title: 'FAQs', id: 'faq' }
+                ].map((link) => (
+                  <li key={link.id}>
+                    <a 
+                      href={`#${link.id}`} 
+                      onClick={(e) => handleScroll(e, link.id)} 
+                      className="group flex items-center text-base cursor-pointer"
+                    >
                       <ChevronsRight className="w-4 h-4 mr-2 text-white" />
-                      <span className="text-[#689f38] group-hover:text-[#548c4e] transition-colors">{link}</span>
+                      <span className="text-[#689f38] group-hover:text-[#548c4e] transition-colors">{link.title}</span>
                     </a>
                   </li>
                 ))}
