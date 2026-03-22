@@ -76,52 +76,52 @@ export default function App() {
   const products = [
     {
       id: 1,
-      name: "CBD Oil 300mg",
+      name: "Oil CBD/DELTA-8 600mg",
       price: "$89.00",
-      image: "/images/cbd-oil.png",
-      description: "Our premium 300mg CBD oil is meticulously extracted to ensure maximum purity. Perfect for daily wellness, it provides a balanced effect for mind and body without any psychoactive properties."
+      image: "/images/Full Spctrum Hemp Caps 175mg 20 capsules.png",
+      description: "Full Spectrum with 3700mg Delta-8, 2300mg CBD, Less than 0.3% Delta 9 THC. An ultra-high potency formula created for maximum efficacy, delivering profound relief and comprehensive botanical benefits."
     },
     {
       id: 2,
-      name: "CBD Ointment",
+      name: "Hemp Caps 175mg 20 capsules",
       price: "$59.00",
-      image: "/images/cbd-ointment.png",
-      description: "Specially formulated for localized relief, our CBD ointment penetrates deep. Enriched with natural botanicals, it soothes skin and muscles effectively while maintaining a non-greasy, refreshing texture."
+      image: "/images/Hemp Caps 175mg 20 capsules.png",
+      description: "Full Spectrum with 150mg THCa per capsule, 25mg CBD per capsule with less than 0.3% Delta 9 THC. A beautifully balanced blend designed to provide comprehensive daily support and holistic wellness from morning to night."
     },
     {
       id: 3,
-      name: "CBD Gummies",
+      name: "CBD Gummies Nigthfall 30mg",
       price: "$98.00",
-      image: "/images/cbd-gummies.png",
-      description: "A delicious and precise way to consume your daily dose of wellness. Each gummy is infused with high-quality CBD and natural fruit flavors to provide a consistent and enjoyable therapeutic experience."
+      image: "/images/CBD Gummies Nigthfall 30mg.png",
+      description: "Full Spectrum with 10mg CBD per Gummy, 10mg CBN per Gummy, 10mg THC per Gummy, Less than 0.3% Delta 9 THC. Formulated to provide deep, restorative sleep and naturally enhance your nightly rest without morning grogginess."
     },
     {
       id: 4,
-      name: "CBD Brownies",
-      price: "$45.00",
-      image: "/images/card-brownies.png",
-      description: "Delicious, relaxing, and infused with high-quality CBD. A perfect treat for any time of the day to help you unwind and destress naturally."
+      name: "CBD Gummies Sleep 30mg",
+      price: "$98.00",
+      image: "/images/CBD Gummies Sleep 30mg.png",
+      description: "Full Spectrum with 18mg Delta 8 THC per Gummy, Less than 0.3% Delta 9 THC. Designed specifically to help you unwind, relax your mind, and achieve a peaceful night's rest seamlessly."
     },
     {
       id: 5,
-      name: "Organic CBD Drops",
+      name: "Hemp Live Caps 600mg 20 capsules",
       price: "$75.00",
-      image: "/images/card-organic.png",
-      description: "Pure and organic CBD drops for a natural wellness boost. Feel the difference with every drop, designed for sublingual use to ensure rapid absorption."
+      image: "/images/Hemp Live Caps 600mg 20 capsules.png",
+      description: "Full Spectrum with 600mg THCa per Capsule, Less than 0.3% Delta 9 THC. A potent, full-spectrum formulation to support natural recovery, providing extended relief directly when you need it most."
     },
     {
       id: 6,
-      name: "CBD Softgels",
+      name: "Fresh Hemp Caps 20 capsules",
       price: "$65.00",
-      image: "/images/card-cbd-store.png",
-      description: "Easy to swallow softgels formulated for slow release and long-lasting relief. Ideal for incorporating into your daily supplement routine seamlessly."
+      image: "/images/Fresh Hemp Caps 20 capsules.png",
+      description: "Full Spectrum with 350mg THCa per capsule, Less than 0.3% Delta 9 THC. Formulated for convenient and precise daily dosing, offering a powerful and natural therapeutic experience."
     },
     {
       id: 7,
-      name: "Intensive CBD Ointment",
+      name: "CBD Isolate Oil 6000mg",
       price: "$69.00",
       image: "/images/Greenderma CBD Ointment 1.png",
-      description: "Our strongest topical formula. Ideal for deep muscle recovery and intense localized soothing after strenuous activities or for chronic discomfort."
+      description: "Pure CBD Isolate: Lab-tested to ensure 0% THC, guaranteed. Less than 0.3% Delta 9 THC. An exceptional option for those seeking the powerful benefits of CBD in its purest form for daily wellness."
     }
   ];
 
@@ -971,17 +971,19 @@ export default function App() {
                       className="w-full h-full object-cover rounded-lg transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
-                  <div className="flex justify-between items-end mb-4 gap-2">
-                    <h3 className="text-xl font-bold leading-tight">{product.name}</h3>
-                    <span className="text-xl font-bold whitespace-nowrap">{product.price}</span>
+                  <div className="mb-4">
+                    <h3 className="text-xl font-bold leading-tight min-h-[3.5rem] flex items-center">{product.name}</h3>
                   </div>
                   <div className="w-full h-px bg-white/20 mb-4"></div>
-                  <p className="text-gray-300 text-sm leading-relaxed mb-6 font-light min-h-[5.5rem] line-clamp-4">
+                  <p className="text-gray-300 text-sm leading-relaxed mb-8 font-light min-h-[6rem] line-clamp-4 flex-grow">
                     {product.description}
                   </p>
-                  <button className="mt-auto text-white text-xs font-bold flex items-center hover:text-[#FFD600] transition-colors uppercase tracking-wider cursor-pointer group/btn">
-                    Order Now <ChevronRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
+                  <div className="mt-auto flex items-center justify-between w-full">
+                    <span className="text-2xl font-bold whitespace-nowrap text-white">{product.price}</span>
+                    <button className="text-white text-xs font-bold flex items-center hover:text-[#FFD600] transition-colors uppercase tracking-wider cursor-pointer group/btn">
+                      Order Now <ChevronRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
