@@ -270,7 +270,7 @@ export default function App() {
             {/* Left Links */}
             <div className="hidden lg:flex items-center space-x-8 text-sm font-medium tracking-wide">
               <a href="#home" onClick={(e) => handleScroll(e, 'home')} className="hover:text-[#FFD600] transition-colors cursor-pointer">Home</a>
-              <a href="#about" onClick={(e) => handleScroll(e, 'about')} className="hover:text-[#FFD600] transition-colors cursor-pointer">About</a>
+              <a href="#about" onClick={(e) => handleScroll(e, 'about')} className="hover:text-[#FFD600] transition-colors cursor-pointer">About Us</a>
               <a href="#products" onClick={(e) => handleScroll(e, 'products')} className="hover:text-[#FFD600] transition-colors cursor-pointer">Products</a>
               <a href="#faq" onClick={(e) => handleScroll(e, 'faq')} className="hover:text-[#FFD600] transition-colors cursor-pointer">FAQ</a>
               <a href="#contact" onClick={(e) => handleScroll(e, 'contact')} className="hover:text-[#FFD600] transition-colors cursor-pointer">Contact</a>
@@ -301,7 +301,7 @@ export default function App() {
           {isMobileMenuOpen && (
             <div className="lg:hidden absolute top-[88px] left-0 right-0 bg-[#0a1f12] border-t border-white/10 z-50 px-6 py-4 flex flex-col space-y-4 shadow-xl">
               <a href="#home" onClick={(e) => { handleScroll(e, 'home'); setIsMobileMenuOpen(false); }} className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">Home</a>
-              <a href="#about" onClick={(e) => { handleScroll(e, 'about'); setIsMobileMenuOpen(false); }} className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">About</a>
+              <a href="#about" onClick={(e) => { handleScroll(e, 'about'); setIsMobileMenuOpen(false); }} className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">About Us</a>
               <a href="#products" onClick={(e) => { handleScroll(e, 'products'); setIsMobileMenuOpen(false); }} className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">Products</a>
               <a href="#faq" onClick={(e) => { handleScroll(e, 'faq'); setIsMobileMenuOpen(false); }} className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">FAQ</a>
               <a href="#contact" onClick={(e) => { handleScroll(e, 'contact'); setIsMobileMenuOpen(false); }} className="text-white hover:text-[#FFD600] transition-colors py-2 border-b border-white/5 cursor-pointer">Contact</a>
@@ -1176,7 +1176,7 @@ export default function App() {
                     <Phone className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold mb-1">Call Us</h3>
+                    <h3 className="text-lg font-bold mb-1">WhatsApp</h3>
                     <p className="text-gray-400 font-light leading-relaxed">
                       +1 (702) 555-0123<br />
                       Mon - Fri: 9:00 AM - 6:00 PM
@@ -1347,7 +1347,7 @@ export default function App() {
               <ul className="space-y-4">
                 {[
                   { title: 'Home', id: 'home' },
-                  { title: 'About', id: 'about' },
+                  { title: 'About Us', id: 'about' },
                   { title: 'Products', id: 'products' },
                   { title: 'Contact', id: 'contact' },
                   { title: 'FAQs', id: 'faq' }
