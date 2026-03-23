@@ -72,6 +72,7 @@ export default function App() {
   ];
 
   const [activeArticle, setActiveArticle] = useState<typeof blogPosts[0] | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
 
   const products = [
     {
@@ -967,7 +968,7 @@ export default function App() {
                 }
               `}} />
               {products.map((product) => (
-                <div key={product.id} className="snap-start shrink-0 w-[280px] sm:w-[320px] md:w-[350px] flex flex-col">
+                <div key={product.id} className="snap-start shrink-0 w-[280px] sm:w-[320px] md:w-[350px] flex flex-col group/card cursor-pointer" onClick={() => setSelectedProduct(product)}>
                   <div className="bg-[#4a7c46] rounded-xl aspect-square mb-6 flex items-center justify-center p-8 relative overflow-hidden group">
                     <img
                       src={product.image}
@@ -976,7 +977,7 @@ export default function App() {
                     />
                   </div>
                   <div className="mb-4">
-                    <h3 className="text-xl font-bold leading-tight min-h-[3.5rem] flex items-center">{product.name}</h3>
+                    <h3 className="text-xl font-bold leading-tight min-h-[3.5rem] flex items-center group-hover/card:text-[#FFD600] transition-colors">{product.name}</h3>
                   </div>
                   <div className="w-full h-px bg-white/20 mb-4"></div>
                   <p className="text-gray-300 text-sm leading-relaxed mb-8 font-light min-h-[6rem] line-clamp-4 flex-grow">
@@ -984,7 +985,7 @@ export default function App() {
                   </p>
                   <div className="mt-auto flex items-center justify-between w-full">
                     <span className="text-2xl font-bold whitespace-nowrap text-white">{product.price}</span>
-                    <button onClick={(e) => handleScroll(e, 'contact')} className="text-white text-xs font-bold flex items-center hover:text-[#FFD600] transition-colors uppercase tracking-wider cursor-pointer group/btn">
+                    <button onClick={(e) => { e.stopPropagation(); handleScroll(e, 'contact'); }} className="text-white text-xs font-bold flex items-center hover:text-[#FFD600] transition-colors uppercase tracking-wider cursor-pointer group/btn">
                       Order Now <ChevronRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </button>
                   </div>
@@ -1274,6 +1275,64 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* Product Preview Modal */}
+      {selectedProduct && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10 font-sans">
+          <div
+            className="absolute inset-0 bg-[#0a1f12]/95 backdrop-blur-sm"
+            onClick={() => setSelectedProduct(null)}
+          ></div>
+          <div className="relative bg-[#1b3320] text-white border border-[#4a7c46] w-full max-w-4xl max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row animate-in fade-in zoom-in duration-300">
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedProduct(null)}
+              className="absolute top-4 right-4 z-10 bg-black/50 text-white p-2 rounded-full hover:bg-[#FFD600] hover:text-black transition-colors cursor-pointer"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Scrollable Content */}
+            <div className="w-full md:w-1/2 bg-[#4a7c46] flex items-center justify-center p-8 md:p-12 min-h-[300px]">
+              <img
+                src={selectedProduct.image}
+                alt={selectedProduct.name}
+                className="w-full max-w-sm h-auto object-cover rounded-lg shadow-2xl"
+              />
+            </div>
+            <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto flex flex-col">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#FFD600] mb-4 leading-tight">
+                {selectedProduct.name}
+              </h2>
+              <div className="text-3xl font-bold text-white mb-6">
+                {selectedProduct.price}
+              </div>
+              <div className="w-full h-px bg-white/20 mb-6"></div>
+              <p className="space-y-6 text-gray-300 leading-relaxed text-lg flex-grow shrink-0">
+                {selectedProduct.description}
+              </p>
+              
+              <div className="mt-8 pt-8 border-t border-white/20 flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={(e) => { 
+                    handleScroll(e, 'contact'); 
+                    setSelectedProduct(null); 
+                  }}
+                  className="flex-1 bg-[#FFD600] text-black px-6 py-4 rounded-lg font-bold hover:bg-yellow-400 transition-colors flex items-center justify-center cursor-pointer group"
+                >
+                  Order Now <ChevronsRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <button
+                  onClick={() => alert('Certificate of Analysis (COA) will be available here soon.')}
+                  className="flex-1 border-2 border-[#689f38] text-white px-6 py-4 rounded-lg font-bold hover:bg-[#689f38] transition-colors flex items-center justify-center cursor-pointer"
+                >
+                  View COA
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Blog Article Modal */}
       {activeArticle && (
