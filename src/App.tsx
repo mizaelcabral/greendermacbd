@@ -73,6 +73,7 @@ export default function App() {
 
   const [activeArticle, setActiveArticle] = useState<typeof blogPosts[0] | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
+  const [activeInfoTopic, setActiveInfoTopic] = useState<{ title: string; subtitle: string; content: string } | null>(null);
 
   const products = [
     {
@@ -123,6 +124,34 @@ export default function App() {
       price: "$69.00",
       image: "/images/CBD Isolate Oil 3000mg.png",
       description: "Pure CBD Isolate: Lab-tested to ensure 0% THC, guaranteed. Less than 0.3% Delta 9 THC. An exceptional option for those seeking the powerful benefits of CBD in its purest form for daily wellness."
+    }
+  ];
+
+  const infoTopics = [
+    {
+      title: "Our Process",
+      subtitle: "Excellence from Seed to Bottle.",
+      content: "Our commitment to quality starts at the source. We utilize state-of-the-art cultivation techniques and cutting-edge laboratory facilities to ensure every drop of our CBD Isolate meets the highest industry standards. Through precise extraction and rigorous third-party testing, we guarantee a pure, potent, and consistent product that you can trust for your wellness journey."
+    },
+    {
+      title: "Payments",
+      subtitle: "Secure and Flexible Transactions.",
+      content: "We offer a variety of secure payment methods to ensure a smooth checkout experience. Whether you are purchasing for personal use or wholesale, your financial data is protected by industry-leading encryption. We accept major credit cards and specialized payment gateways tailored for the global market."
+    },
+    {
+      title: "Special Offers",
+      subtitle: "Bulk Benefits for Consistent Care.",
+      content: "Many wellness treatments require consistent use over time. To support your long-term health goals, we offer exclusive discounts on bulk orders. For purchases of 12 units or more, you unlock special pricing, making it easier and more affordable to maintain your supply of high-potency CBD."
+    },
+    {
+      title: "Shipping",
+      subtitle: "Worldwide Delivery with Local Compliance.",
+      content: "We ship our premium CBD products worldwide. To ensure a hassle-free delivery, we strictly adhere to the local laws and regulations of each destination country. Our logistics team handles all necessary documentation to ensure your order arrives safely and legally at your doorstep, no matter where you are."
+    },
+    {
+      title: "Regulations",
+      subtitle: "Full Transparency and Compliance.",
+      content: "We operate in total alignment with international health and safety standards. Every batch of our 6000mg CBD Isolate is accompanied by a Certificate of Analysis (COA), proving its purity and 0% THC content. We are dedicated to transparency, ensuring our products are as safe as they are effective."
     }
   ];
 
@@ -212,6 +241,43 @@ export default function App() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  // Newsletter Subscription State
+  const [subscribeEmail, setSubscribeEmail] = useState('');
+  const [subscribeStatus, setSubscribeStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!subscribeEmail) return;
+
+    setSubscribeStatus('loading');
+
+    try {
+      const response = await fetch('http://localhost:3001/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: 'Newsletter Subscriber',
+          email: subscribeEmail,
+          message: 'Lead veio do form: Stay in tune with nature\'s healing power'
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to subscribe');
+      }
+
+      setSubscribeStatus('success');
+      setSubscribeEmail('');
+      setTimeout(() => setSubscribeStatus('idle'), 5000);
+    } catch (err) {
+      console.error('Subscription error:', err);
+      setSubscribeStatus('error');
+      setTimeout(() => setSubscribeStatus('idle'), 5000);
+    }
   };
 
   const faqs = [
@@ -1395,7 +1461,49 @@ export default function App() {
         </div>
       )}
 
-      {/* Footer Section */}
+      {/* Information Popup Modal */}
+      {activeInfoTopic && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10 font-sans">
+          <div
+            className="absolute inset-0 bg-[#0a1f12]/95 backdrop-blur-sm"
+            onClick={() => setActiveInfoTopic(null)}
+          ></div>
+          <div className="relative bg-[#1b3320] text-white border border-[#4a7c46] w-full max-w-2xl max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl flex flex-col animate-in fade-in zoom-in duration-300">
+            {/* Close Button */}
+            <button
+              onClick={() => setActiveInfoTopic(null)}
+              className="absolute top-4 right-4 z-10 bg-black/50 text-white p-2 rounded-full hover:bg-[#FFD600] hover:text-black transition-colors cursor-pointer"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Content */}
+            <div className="p-8 md:p-12 overflow-y-auto flex flex-col items-center text-center">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#FFD600] mb-4 leading-tight">
+                {activeInfoTopic.title}
+              </h2>
+              <div className="text-xl font-bold text-white mb-6">
+                {activeInfoTopic.subtitle}
+              </div>
+              <div className="w-24 h-px bg-white/20 mb-6"></div>
+              <p className="space-y-6 text-gray-300 leading-relaxed text-lg">
+                {activeInfoTopic.content}
+              </p>
+              
+              <div className="mt-8 pt-8 w-full border-t border-white/20 flex justify-center">
+                <button
+                  onClick={() => setActiveInfoTopic(null)}
+                  className="bg-[#4a7c46] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#548c4e] transition-colors cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Footer Section */ }
       <footer className="bg-[#162a1a] text-white py-16 lg:py-24 font-sans">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr_1fr] gap-12 lg:gap-0">
@@ -1435,16 +1543,30 @@ export default function App() {
 
               <div className="w-full border border-dashed border-white/20 rounded-xl p-8 bg-transparent">
                 <h4 className="text-xl sm:text-2xl font-bold mb-6">Stay in tune with <br className="sm:hidden" /> nature's healing power</h4>
-                <div className="flex flex-col sm:flex-row bg-[#3a6336] p-1.5 rounded-lg">
+                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row bg-[#3a6336] p-1.5 rounded-lg">
                   <input
                     type="email"
+                    required
+                    value={subscribeEmail}
+                    onChange={(e) => setSubscribeEmail(e.target.value)}
+                    disabled={subscribeStatus === 'loading'}
                     placeholder="Your Email"
-                    className="bg-transparent text-white placeholder-gray-300 px-4 py-2 outline-none flex-grow text-sm"
+                    className="bg-transparent text-white placeholder-gray-300 px-4 py-2 outline-none flex-grow text-sm disabled:opacity-50"
                   />
-                  <button className="bg-[#FFD600] text-black px-6 py-2.5 rounded font-bold text-sm hover:bg-yellow-400 transition-colors whitespace-nowrap cursor-pointer">
-                    Subscribe
+                  <button 
+                    type="submit"
+                    disabled={subscribeStatus === 'loading'}
+                    className="bg-[#FFD600] text-black px-6 py-2.5 rounded font-bold text-sm hover:bg-yellow-400 transition-colors whitespace-nowrap cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {subscribeStatus === 'loading' ? 'Subscribing...' : 'Subscribe'}
                   </button>
-                </div>
+                </form>
+                {subscribeStatus === 'success' && (
+                  <p className="text-[#FFD600] text-sm mt-3 text-left">Successfully subscribed to our newsletter!</p>
+                )}
+                {subscribeStatus === 'error' && (
+                  <p className="text-red-400 text-sm mt-3 text-left">An error occurred. Please try again.</p>
+                )}
               </div>
             </div>
 
@@ -1452,11 +1574,11 @@ export default function App() {
             <div className="flex flex-col lg:pl-12">
               <h3 className="text-2xl font-bold mb-8">Information</h3>
               <ul className="space-y-4">
-                {['Our Process', 'Payments', 'Special Offers', 'Shipping', 'Regulations'].map((item) => (
-                  <li key={item}>
-                    <a href="#" className="group flex items-center text-base cursor-pointer">
+                {infoTopics.map((topic) => (
+                  <li key={topic.title}>
+                    <a href="#" onClick={(e) => { e.preventDefault(); setActiveInfoTopic(topic); }} className="group flex items-center text-base cursor-pointer">
                       <ChevronRight className="w-4 h-4 mr-2 text-white" />
-                      <span className="text-[#689f38] group-hover:text-[#548c4e] transition-colors">{item}</span>
+                      <span className="text-[#689f38] group-hover:text-[#548c4e] transition-colors">{topic.title}</span>
                     </a>
                   </li>
                 ))}
