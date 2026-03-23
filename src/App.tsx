@@ -76,9 +76,9 @@ export default function App() {
   const products = [
     {
       id: 1,
-      name: "Oil CBD/DELTA-8 600mg",
+      name: "CBD DELTA-8 Oil 6000mg",
       price: "$89.00",
-      image: "/images/Full Spctrum Hemp Caps 175mg 20 capsules.png",
+      image: "/images/CBD DELTA-8 Oil 6000mg.png",
       description: "Full Spectrum with 3700mg Delta-8, 2300mg CBD, Less than 0.3% Delta 9 THC. An ultra-high potency formula created for maximum efficacy, delivering profound relief and comprehensive botanical benefits."
     },
     {
@@ -118,9 +118,9 @@ export default function App() {
     },
     {
       id: 7,
-      name: "CBD Isolate Oil 6000mg",
+      name: "CBD Isolate Oil 3000mg",
       price: "$69.00",
-      image: "/images/Greenderma CBD Ointment 1.png",
+      image: "/images/CBD Isolate Oil 3000mg.png",
       description: "Pure CBD Isolate: Lab-tested to ensure 0% THC, guaranteed. Less than 0.3% Delta 9 THC. An exceptional option for those seeking the powerful benefits of CBD in its purest form for daily wellness."
     }
   ];
@@ -1389,15 +1389,15 @@ export default function App() {
               </div>
             </div>
 
-            {/* Socials */}
+            {/* Information */}
             <div className="flex flex-col lg:pl-12">
-              <h3 className="text-2xl font-bold mb-8">Socials</h3>
+              <h3 className="text-2xl font-bold mb-8">Information</h3>
               <ul className="space-y-4">
-                {['Instagram', 'Linkedin', 'Youtube', 'Facebook', 'Twitter'].map((social) => (
-                  <li key={social}>
+                {['Our Process', 'Payments', 'Special Offers', 'Shipping', 'Regulations'].map((item) => (
+                  <li key={item}>
                     <a href="#" className="group flex items-center text-base cursor-pointer">
-                      <ChevronsRight className="w-4 h-4 mr-2 text-white" />
-                      <span className="text-[#689f38] group-hover:text-[#548c4e] transition-colors">{social}</span>
+                      <ChevronRight className="w-4 h-4 mr-2 text-white" />
+                      <span className="text-[#689f38] group-hover:text-[#548c4e] transition-colors">{item}</span>
                     </a>
                   </li>
                 ))}
