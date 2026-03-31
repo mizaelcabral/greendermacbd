@@ -124,6 +124,20 @@ export default function App() {
       price: "$69.00",
       image: "/images/CBD Isolate Oil 3000mg.png",
       description: "Pure CBD Isolate: Lab-tested to ensure 0% THC, guaranteed. Less than 0.3% Delta 9 THC. An exceptional option for those seeking the powerful benefits of CBD in its purest form for daily wellness."
+    },
+    {
+      id: 8,
+      name: "CBD Balm Muscle Recovery 150g",
+      price: "$65.00",
+      image: "/images/cbd welness muscle recovery balm.png",
+      description: "A powerful topical formula to soothe tired muscles and support rapid recovery. Enriched with premium CBD and natural botanicals to provide targeted, deep tissue relief."
+    },
+    {
+      id: 9,
+      name: "CBD Wellness Soothing Balm 150g",
+      price: "$65.00",
+      image: "/images/cbd welness soothing balm.png",
+      description: "A calming balm formulated with full-spectrum CBD and essential oils. Designed to nourish the skin, ease daily tension, and promote overall relaxation and wellness."
     }
   ];
 
