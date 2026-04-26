@@ -78,45 +78,51 @@ export default function App() {
   const products = [
     {
       id: 1,
-      name: "CBD DELTA-8 Oil 6000mg",
+      name: "CBD/DELTA-8 Oil 6000mg",
       price: "$89.00",
-      image: "/images/CBD DELTA-8 Oil 6000mg.png",
-      description: "Full Spectrum with 3700mg Delta-8, 2300mg CBD, Less than 0.3% Delta 9 THC. An ultra-high potency formula created for maximum efficacy, delivering profound relief and comprehensive botanical benefits."
+      image: "/images/tincture-cbd-delta-8.png",
+      description: "An ultra-high potency formula combining 3700mg Delta-8 and 2300mg CBD for maximum efficacy. Designed for profound relief and comprehensive botanical benefits through our premium full-spectrum extract.",
+      coa: "https://drive.google.com/file/d/1DM7OT4i72sQAUPsm0P37ZLFZEZjTZizS/view"
     },
     {
       id: 2,
-      name: "Hemp Caps 175mg 20 capsules",
+      name: "Hemp Caps 350mg 10 Capsule",
       price: "$59.00",
       image: "/images/Hemp Caps 175mg 20 capsules.png",
-      description: "Full Spectrum with 150mg THCa per capsule, 25mg CBD per capsule with less than 0.3% Delta 9 THC. A beautifully balanced blend designed to provide comprehensive daily support and holistic wellness from morning to night."
+      description: "Full Spectrum with 150mg THCa per capsule, 25mg CBD per capsule with less than 0.3% Delta 9 THC. A beautifully balanced blend designed to provide comprehensive daily support and holistic wellness from morning to night.",
+      coa: "https://drive.google.com/file/d/1x8CId9HkKhcbRH7fye3bUMd-vSUPVXgz/view"
     },
     {
       id: 3,
       name: "CBD Gummies Nigthfall 30mg",
       price: "$98.00",
       image: "/images/CBD Gummies Nigthfall 30mg.png",
-      description: "Full Spectrum with 10mg CBD per Gummy, 10mg CBN per Gummy, 10mg THC per Gummy, Less than 0.3% Delta 9 THC. Formulated to provide deep, restorative sleep and naturally enhance your nightly rest without morning grogginess."
+      description: "Full Spectrum with 10mg CBD per Gummy, 10mg CBN per Gummy, 10mg THC per Gummy, Less than 0.3% Delta 9 THC. Formulated to provide deep, restorative sleep and naturally enhance your nightly rest without morning grogginess.",
+      coa: "https://drive.google.com/file/d/10d_lzrJ6lCe3Y8w4Zh0ffV0HwsjoqvOz/view"
     },
     {
       id: 4,
       name: "CBD Gummies Sleep 30mg",
       price: "$98.00",
       image: "/images/CBD Gummies Sleep 30mg.png",
-      description: "Full Spectrum with 18mg Delta 8 THC per Gummy, Less than 0.3% Delta 9 THC. Designed specifically to help you unwind, relax your mind, and achieve a peaceful night's rest seamlessly."
+      description: "Full Spectrum with 18mg Delta 8 THC per Gummy, Less than 0.3% Delta 9 THC. Designed specifically to help you unwind, relax your mind, and achieve a peaceful night's rest seamlessly.",
+      coa: "https://drive.google.com/file/d/1H-9_7eI-mVfAStcnxEHZd71sOTnJ4aP_/view"
     },
     {
       id: 5,
-      name: "Hemp Live Caps 600mg 20 capsules",
+      name: "Hemp Live Caps 600mg 10 Capsule",
       price: "$75.00",
       image: "/images/Hemp Live Caps 600mg 20 capsules.png",
-      description: "Full Spectrum with 600mg THCa per Capsule, Less than 0.3% Delta 9 THC. A potent, full-spectrum formulation to support natural recovery, providing extended relief directly when you need it most."
+      description: "Full Spectrum with 600mg THCa per Capsule, Less than 0.3% Delta 9 THC. A potent, full-spectrum formulation to support natural recovery, providing extended relief directly when you need it most.",
+      coa: "https://drive.google.com/file/d/1ghUVQFes13wZkgrVQFqmRTA7Dn7KVm_H/view"
     },
     {
       id: 6,
-      name: "Fresh Hemp Caps 20 capsules",
+      name: "Hemp Capsule Fresh 10 Caps 350mg",
       price: "$65.00",
       image: "/images/Fresh Hemp Caps 20 capsules.png",
-      description: "Full Spectrum with 350mg THCa per capsule, Less than 0.3% Delta 9 THC. Formulated for convenient and precise daily dosing, offering a powerful and natural therapeutic experience."
+      description: "Full Spectrum with 350mg THCa per capsule, Less than 0.3% Delta 9 THC. Formulated for convenient and precise daily dosing, offering a powerful and natural therapeutic experience.",
+      coa: "https://drive.google.com/file/d/1tprxj6ciWlNfOzrBKbUyI1BUkK4yOJz7/view"
     },
     {
       id: 7,
@@ -124,20 +130,6 @@ export default function App() {
       price: "$69.00",
       image: "/images/CBD Isolate Oil 3000mg.png",
       description: "Pure CBD Isolate: Lab-tested to ensure 0% THC, guaranteed. Less than 0.3% Delta 9 THC. An exceptional option for those seeking the powerful benefits of CBD in its purest form for daily wellness."
-    },
-    {
-      id: 8,
-      name: "CBD Balm Muscle Recovery 150g",
-      price: "$65.00",
-      image: "/images/cbd welness muscle recovery balm.png",
-      description: "A powerful topical formula to soothe tired muscles and support rapid recovery. Enriched with premium CBD and natural botanicals to provide targeted, deep tissue relief."
-    },
-    {
-      id: 9,
-      name: "CBD Wellness Soothing Balm 150g",
-      price: "$65.00",
-      image: "/images/cbd welness soothing balm.png",
-      description: "A calming balm formulated with full-spectrum CBD and essential oils. Designed to nourish the skin, ease daily tension, and promote overall relaxation and wellness."
     }
   ];
 
@@ -1400,12 +1392,18 @@ export default function App() {
                     handleScroll(e, 'contact'); 
                     setSelectedProduct(null); 
                   }}
-                  className="flex-1 bg-[#FFD600] text-black px-6 py-4 rounded-lg font-bold hover:bg-yellow-400 transition-colors flex items-center justify-center cursor-pointer group"
+                  className="flex-1 bg-[#FFD600] text-black px-4 py-4 rounded-lg font-bold hover:bg-yellow-400 transition-colors flex items-center justify-center cursor-pointer group whitespace-nowrap"
                 >
-                  Order Now <ChevronsRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  Order Now <ChevronsRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" />
                 </button>
                 <button
-                  onClick={() => alert('Certificate of Analysis (COA) will be available here soon.')}
+                  onClick={() => {
+                    if (selectedProduct.coa) {
+                      window.open(selectedProduct.coa, '_blank');
+                    } else {
+                      alert('Certificate of Analysis (COA) will be available here soon.');
+                    }
+                  }}
                   className="flex-1 border-2 border-[#689f38] text-white px-6 py-4 rounded-lg font-bold hover:bg-[#689f38] transition-colors flex items-center justify-center cursor-pointer"
                 >
                   View COA
