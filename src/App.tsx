@@ -1239,8 +1239,8 @@ export default function App() {
                   <div>
                     <h3 className="text-lg font-bold mb-1">Our Location</h3>
                     <p className="text-gray-400 font-light leading-relaxed">
-                      9107 WEST RUSSELL ROAD SUITE 100<br />
-                      LAS VEGAS, NV 89148, USA
+                      Greenderma LLC - EUA - Flórida,<br />
+                      7901 4th st, 300 St. Petersburg, 33702
                     </p>
                   </div>
                 </div>
